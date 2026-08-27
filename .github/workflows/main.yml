@@ -1,10 +1,12 @@
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build-and-test:
-    # The type of machine or runner the job will run on
-    runs-on: self-hosted
+    runs-on: [self-hosted, windows, x64] 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
