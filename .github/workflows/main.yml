@@ -1,24 +1,52 @@
+name: Monthly email sender
+
 on:
-  push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
   schedule:
     - cron: "0 0 1 * *"
   workflow_dispatch:
 
+defaults:
+  run:
+    shell: cmd
+
 jobs:
   send-emails:
     runs-on: [self-hosted, windows, x64]
-    defaults:
-      run:
-        shell: cmd
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Show Go version
-        run: go version
+      - name: Ensure config directory exists
+        run: mkdir %USERPROFILE%\.eraser
+
+      - name: Write config
+        run: |
+          > %USERPROFILE%\.eraser\config.yaml (
+            echo first_name: %ERASER_FIRST_NAME%
+            echo last_name: %ERASER_LAST_NAME%
+            echo email: %ERASER_EMAIL%
+            echo street_address: %ERASER_STREET%
+            echo city: %ERASER_CITY%
+            echo state: %ERASER_STATE%
+            echo zip: %ERASER_ZIP%
+            echo country: %ERASER_COUNTRY%
+            echo phone: %ERASER_PHONE%
+            echo gmail_address: %ERASER_GMAIL%
+            echo gmail_app_password: %ERASER_GMAIL_APP_PASSWORD%
+            echo default_template: generic
+          )
+        env:
+          ERASER_FIRST_NAME: ${{ secrets.ERASER_FIRST_NAME }}
+          ERASER_LAST_NAME: ${{ secrets.ERASER_LAST_NAME }}
+          ERASER_EMAIL: ${{ secrets.ERASER_EMAIL }}
+          ERASER_STREET: ${{ secrets.ERASER_STREET }}
+          ERASER_CITY: ${{ secrets.ERASER_CITY }}
+          ERASER_STATE: ${{ secrets.ERASER_STATE }}
+          ERASER_ZIP: ${{ secrets.ERASER_ZIP }}
+          ERASER_COUNTRY: ${{ secrets.ERASER_COUNTRY }}
+          ERASER_PHONE: ${{ secrets.ERASER_PHONE }}
+          ERASER_GMAIL: ${{ secrets.ERASER_GMAIL }}
+          ERASER_GMAIL_APP_PASSWORD: ${{ secrets.ERASER_GMAIL_APP_PASSWORD }}
 
       - name: Build
         run: go build -o eraser.exe ./cmd/eraser
