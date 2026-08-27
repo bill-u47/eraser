@@ -10,14 +10,18 @@ on:
 jobs:
   send-emails:
     runs-on: [self-hosted, windows, x64]
+    defaults:
+      run:
+        shell: cmd
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Show Go version
+        run: go version
+
       - name: Build
-        shell: cmd
-        run: go build -o eraser.exe .
+        run: go build -o eraser.exe ./cmd/eraser
 
       - name: Send emails
-        shell: cmd
         run: eraser.exe send
