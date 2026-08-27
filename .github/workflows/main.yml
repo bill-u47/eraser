@@ -14,13 +14,16 @@ defaults:
 
 jobs:
   send-emails:
-    runs-on: [self-hosted, windows, x64]
+    runs-on: windows-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Ensure config directory exists
-        run: rmdir /s /q %USERPROFILE%\.eraser && mkdir %USERPROFILE%\.eraser
+        run: |
+          if exist "%USERPROFILE%\.eraser" rmdir /s /q "%USERPROFILE%\.eraser"
+          mkdir "%USERPROFILE%\.eraser"
 
       - name: Write config
         run: |
@@ -63,6 +66,11 @@ jobs:
           ERASER_SMTP_USERNAME: ${{ secrets.ERASER_SMTP_USERNAME }}
           ERASER_SMTP_PASSWORD: ${{ secrets.ERASER_SMTP_PASSWORD }}
           ERASER_TEMPLATE: ${{ secrets.ERASER_TEMPLATE }}
+
+      - name: Set up Go (optional but recommended)
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21' # change to the Go version your project requires
 
       - name: Build
         run: go build -o eraser.exe ./cmd/eraser
