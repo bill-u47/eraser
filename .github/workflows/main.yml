@@ -1,1 +1,10 @@
-runs-on: self-hosted
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    # The type of machine or runner the job will run on
+    runs-on: self-hosted
