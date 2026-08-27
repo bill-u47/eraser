@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Ensure config directory exists
-        run: mkdir %USERPROFILE%\.eraser
+        run: rmdir /s /q %USERPROFILE%\.eraser && mkdir %USERPROFILE%\.eraser
 
       - name: Write config
         run: |
