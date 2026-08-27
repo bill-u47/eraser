@@ -29,36 +29,36 @@ jobs:
             echo   first_name: "%ERASER_FIRST_NAME%"
             echo   last_name: "%ERASER_LAST_NAME%"
             echo   email: "%ERASER_EMAIL%"
-            echo   address: "%ERASER_STREET%"
+            echo   address: "%ERASER_ADDRESS%"
             echo   city: "%ERASER_CITY%"
             echo   state: "%ERASER_STATE%"
-            echo   zip_code: "%ERASER_ZIP%"
+            echo   zip_code: "%ERASER_ZIP_CODE%"
             echo   country: "%ERASER_COUNTRY%"
             echo   phone: "%ERASER_PHONE%"
             echo email:
-            echo   provider: smtp
+            echo   provider: "%ERASER_EMAIL_PROVIDER%"
             echo   from: "%ERASER_EMAIL%"
             echo   smtp:
-            echo     host: smtp.gmail.com
-            echo     port: 465
-            echo     username: "%ERASER_GMAIL%"
-            echo     password: "%ERASER_GMAIL_APP_PASSWORD%"
+            echo     host: "%ERASER_SMTP_HOST%"
+            echo     port: "ERASER_SMTP_PORT%"
+            echo     username: "%ERASER_SMTP_USERNAME%"
+            echo     password: "%ERASER_SMTP_PASSWORD%"
             echo     use_tls: true
             echo options:
-            echo   template: generic
+            echo   template: "%ERASER_TEMPLATE%"
           )
         env:
           ERASER_FIRST_NAME: ${{ secrets.ERASER_FIRST_NAME }}
           ERASER_LAST_NAME: ${{ secrets.ERASER_LAST_NAME }}
           ERASER_EMAIL: ${{ secrets.ERASER_EMAIL }}
-          ERASER_STREET: ${{ secrets.ERASER_STREET }}
+          ERASER_ADDRESS: ${{ secrets.ERASER_ADDRESS }}
           ERASER_CITY: ${{ secrets.ERASER_CITY }}
           ERASER_STATE: ${{ secrets.ERASER_STATE }}
           ERASER_ZIP: ${{ secrets.ERASER_ZIP }}
           ERASER_COUNTRY: ${{ secrets.ERASER_COUNTRY }}
           ERASER_PHONE: ${{ secrets.ERASER_PHONE }}
-          ERASER_GMAIL: ${{ secrets.ERASER_GMAIL }}
-          ERASER_GMAIL_APP_PASSWORD: ${{ secrets.ERASER_GMAIL_APP_PASSWORD }}
+          ERASER_SMTP_USERNAME: ${{ secrets.ERASER_EMAIL }}
+          ERASER_SMTP_PASSWORD: ${{ secrets.ERASER_SMTP_PASSWORD }}
 
       - name: Build
         run: go build -o eraser.exe ./cmd/eraser
