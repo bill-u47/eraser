@@ -40,7 +40,7 @@ jobs:
             echo   from: "%ERASER_EMAIL%"
             echo   smtp:
             echo     host: "%ERASER_SMTP_HOST%"
-            echo     port: "ERASER_SMTP_PORT%"
+            echo     port: "%ERASER_SMTP_PORT%"
             echo     username: "%ERASER_SMTP_USERNAME%"
             echo     password: "%ERASER_SMTP_PASSWORD%"
             echo     use_tls: true
