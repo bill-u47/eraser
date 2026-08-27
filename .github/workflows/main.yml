@@ -57,8 +57,12 @@ jobs:
           ERASER_ZIP_CODE: ${{ secrets.ERASER_ZIP_CODE }}
           ERASER_COUNTRY: ${{ secrets.ERASER_COUNTRY }}
           ERASER_PHONE: ${{ secrets.ERASER_PHONE }}
+          ERASER_EMAIL_PROVIDER: ${{ secrets.ERASER_EMAIL_PROVIDER }}
+          ERASER_SMTP_HOST: ${{ secrets.ERASER_SMTP_HOST }}
+          ERASER_SMTP_PORT: ${{ secrets.ERASER_SMTP_PORT }}
           ERASER_SMTP_USERNAME: ${{ secrets.ERASER_SMTP_USERNAME }}
           ERASER_SMTP_PASSWORD: ${{ secrets.ERASER_SMTP_PASSWORD }}
+          ERASER_TEMPLATE: ${{ secrets.ERASER_TEMPLATE }}
 
       - name: Build
         run: go build -o eraser.exe ./cmd/eraser
