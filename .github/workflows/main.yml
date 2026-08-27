@@ -8,11 +8,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-test:
+  send-emails:
     runs-on: [self-hosted, windows, x64]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Run eraser send
-        run: ./eraser send
+      - name: Build
+        shell: cmd
+        run: go build -o eraser.exe .
+
+      - name: Send emails
+        shell: cmd
+        run: eraser.exe send
