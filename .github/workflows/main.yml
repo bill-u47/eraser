@@ -22,18 +22,27 @@ jobs:
       - name: Write config
         run: |
           > %USERPROFILE%\.eraser\config.yaml (
-            echo first_name: %ERASER_FIRST_NAME%
-            echo last_name: %ERASER_LAST_NAME%
-            echo email: %ERASER_EMAIL%
-            echo street_address: %ERASER_STREET%
-            echo city: %ERASER_CITY%
-            echo state: %ERASER_STATE%
-            echo zip: %ERASER_ZIP%
-            echo country: %ERASER_COUNTRY%
-            echo phone: %ERASER_PHONE%
-            echo gmail_address: %ERASER_GMAIL%
-            echo gmail_app_password: %ERASER_GMAIL_APP_PASSWORD%
-            echo default_template: generic
+            echo profile:
+            echo   first_name: "%ERASER_FIRST_NAME%"
+            echo   last_name: "%ERASER_LAST_NAME%"
+            echo   email: "%ERASER_EMAIL%"
+            echo   address: "%ERASER_STREET%"
+            echo   city: "%ERASER_CITY%"
+            echo   state: "%ERASER_STATE%"
+            echo   zip_code: "%ERASER_ZIP%"
+            echo   country: "%ERASER_COUNTRY%"
+            echo   phone: "%ERASER_PHONE%"
+            echo email:
+            echo   provider: smtp
+            echo   from: "%ERASER_EMAIL%"
+            echo   smtp:
+            echo     host: smtp.gmail.com
+            echo     port: 465
+            echo     username: "%ERASER_GMAIL%"
+            echo     password: "%ERASER_GMAIL_APP_PASSWORD%"
+            echo     use_tls: true
+            echo options:
+            echo   template: generic
           )
         env:
           ERASER_FIRST_NAME: ${{ secrets.ERASER_FIRST_NAME }}
